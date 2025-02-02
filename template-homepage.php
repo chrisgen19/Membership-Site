@@ -16,80 +16,21 @@ get_header(); ?>
     </main><!-- #main -->
 </div><!-- #primary -->
 
-<div class="membership-header bg-black pt-5">
+<div class="membership-header bg-black">
   <div class="container">
-    <h1 class="text-center mb-5 header-white">
-      <span class="header-yellow">SELECT MEMBERSHIP TIER </span> THAT<br/> IS BEST SUITED FOR YOU
-    </h1>
+
+    <?php echo mytheme_display_header_text(); ?>
     
     <!-- Pricing Toggle Section -->
-    <div class="pricing-toggle text-center mb-40">
+    <div class="pricing-toggle text-center mb-40 d-flex justify-content-center align-items-center">
         <span class="text-white me-3">Pay Monthly</span>
-        <div class="form-check form-switch d-inline-block">
+        <div class="form-switch d-flex align-items-center">
             <input class="form-check-input" type="checkbox" id="pricingToggle">
             <label class="form-check-label text-muted" for="pricingToggle">Save with Yearly</label>
         </div>
     </div>
   </div>
 </div>
-
-<!-- Pricing Cards Section -->
-<div class="pricing-section">
-  <div class="container">
-    <div class="row g-4">
-      <!-- Free Plan Card -->
-      <div class="col-md-6 mt-0">
-        <div class="pricing-card pricing-card--dark">
-          <div class="plan-name">Scout</div>
-          <div class="price-section">
-            <h2 class="price">Free</h2>
-          </div>
-          <div class="access-level">Limited access</div>
-          <a href="https://membership.test/register/free/" class="btn-select free-plan">Select Plan</a>
-          <div class="description">
-            Basic access for Job listings. Lorem Epsom dolor sit met, consectetuer adipiscing edit. Donec odio.
-          </div>
-          <ul class="features-list">
-            <li class="available">View Trailers</li>
-            <li class="available">Job Board</li>
-            <li class="available">Watch Career and Education Trailers</li>
-            <li>Unlimited Access to Career boards</li>
-            <li>Unlimited Access to Career videos</li>
-            <li>Premium Industry Awareness Content</li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Premium Plan Card -->
-      <div class="col-md-6 mt-0">
-        <div class="pricing-card pricing-card--light">
-          <div class="plan-name">Scout</div>
-          <div class="price-section">
-            <h2 class="price">£19 <span class="period">/month</span></h2>
-            <div class="billing-info">
-              <span class="save">Save £99</span>
-              <span class="separator">|</span>
-              <span class="billed">Billed yearly</span>
-            </div>
-          </div>
-          <a href="https://membership.test/register/premium/" class="btn-select premium-plan">Select Plan</a>
-          <div class="description">
-            Basic access for Job listings. Lorem Epsom dolor sit met, consectetuer adipiscing edit. Donec odio.
-          </div>
-          <ul class="features-list">
-            <li class="available">View Trailers</li>
-            <li class="available">Job Board</li>
-            <li class="available">Watch Career and Education Trailers</li>
-            <li class="available">Unlimited Access to Career boards</li>
-            <li class="available">Unlimited Access to Career videos</li>
-            <li>Premium Industry Awareness Content</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <div class="pricing-section" >
     <div class="container">
@@ -100,7 +41,7 @@ get_header(); ?>
                 'posts_per_page' => -1,
                 'post_status'    => 'publish',
                 'orderby'        => 'menu_order',
-                'order'          => 'ASC'  // ASC will show 1,2,3...
+                'order'          => 'ASC'  
             );
 
             $products_query = new WP_Query($args);
@@ -201,15 +142,7 @@ get_header(); ?>
 <style>
     .memberpress-products-wrapper {
         margin: 0 auto;
-        /* padding: 20px; */
     }
-    
-    /* .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 30px;
-        margin-top: 30px;
-    } */
 
     .products-grid {
         display: grid;
@@ -256,31 +189,6 @@ get_header(); ?>
         font-weight: bold;
         margin: 25px 0;
         color: #0073aa;
-    }
-    
-    .product-benefits {
-        /* margin: 25px 0;
-        color: #444;
-        text-align: left; */
-    }
-    
-    .product-benefits ul {
-        /* list-style-type: none;
-        padding: 0;
-        margin: 0; */
-    }
-    
-    .product-benefits ul li {
-        /* padding: 8px 0;
-        position: relative;
-        padding-left: 25px; */
-    }
-    
-    .product-benefits ul li:before {
-        /* content: "✓";
-        position: absolute;
-        left: 0;
-        color: #0073aa; */
     }
     
     .product-button .button {

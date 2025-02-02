@@ -1,7 +1,68 @@
 /* Add to your theme's style.css */
 
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// Base
+@import 'base/fonts';
+@import 'base/typography';
+
+.mepr-checkout-container .invoice-wrapper .invoice-heading{
+    @include heading-1;
+    font-family: Impact Regular;
+    span.header-yellow{
+        color:#fba92a;
+    }
+}
+
+.mepr-checkout-container .invoice-wrapper.thankyou{
+    h2{
+        @include heading-1;
+        font-family: Impact Regular;
+        span.header-yellow{
+            color:#fba92a;
+        }
+    }
+    p{
+        @include body-text;
+    }
+}
+
+#mepr-profile-details dd,
+.mp_price_str,
+.body-text, p,
+a, a:visited,
+a:hover, a:focus, a:active{
+    color:#FFF;
+    @include body-text;
+}
+
 body{
-    background: black;
+    background-color: map-get($colors, "black") !important;
+}
+
+.mepr-account-welcome-message{
+    background: #FFECCC 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    @include body-text;
+    p{
+
+        color:#070707;
+    }
+}
+
+.mepr-account-container .mepr-button.btn-outline{
+    background: #FBA92A 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    color:#070707;
+}
+
+
+#mepr-profile-details{
+    background: #1B1B1B 0% 0% no-repeat padding-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
 }
 
 .mepr-checkout-container .invoice-wrapper {
@@ -35,13 +96,30 @@ body{
     }
 }
 
+.form-wrapper .mepr-payment-option-label{
+    background-color: #FBA92A;
+}
 
+.mepr-payment-methods-radios label.checked{
+    border: 2px solid #FFF;
+    background-color: #f08c32;
+}
+
+.mp_wrapper h1, .mp_wrapper h2, .mp_wrapper h3{
+    color:#FFF;
+    @include heading-3;
+
+}
 
 .mp_wrapper .mp-form-row label,
 #mepr-profile-details dt,
 .mepr-account-container table,
 .mepr-pro-account-table__subscr, .mepr-pro-account-table__rebill{
     color:#FFF;
+}
+
+.mepr-checkout-container .invoice-wrapper table tr td p{
+    @include body-text;
 }
 
 .form-wrapper{
@@ -68,4 +146,30 @@ body{
 
 .mepr-checkout-container .invoice-wrapper table tr td{
     border-bottom: 1px solid #FFF !important;
+}
+
+
+.mepr-checkout-container .form-wrapper input[type="submit"]{
+    background-color: #FBA92A;
+    color:#000;
+    padding: 1rem;
+    background: #FBA92A 0% 0% no-repeat padding-box;
+    border: none;
+    border-radius: 8px;
+
+    @include semi-large-text;
+
+    &:hover{
+        background-color: #f08c32;
+    }
+}
+
+.text-gray,
+.mepr-pro-account-table .sub,
+.mepr-pro-account-table thead th{
+    color:#FFF !important;
+}
+
+.have-coupon-link{
+    text-decoration: underline;
 }

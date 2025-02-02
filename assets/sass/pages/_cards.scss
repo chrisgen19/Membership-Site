@@ -1,6 +1,6 @@
 .pricing-section {
-    padding: 2rem 0;
-    background-color: #000;
+    // padding: 2rem 0;
+    background-color: map-get($colors, "black");
 
     // Container customization for card width
     .container {
@@ -22,7 +22,24 @@
       &--dark {
         background-color: #1A1A1A;
         color: #fff;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        //border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid #FFFFFF;
+
+        .price-section{
+            .billing-info{
+                color:#FFFFFF !important;
+                opacity: 0.5;
+            }
+        }
+
+        .features-list{
+            li{
+                &.available::before {
+                        background-image: url("/wp-content/themes/membership/assets/images/checked.svg") !important;
+                }
+            }
+        }
+        
       }
       
       &--light {
@@ -31,17 +48,19 @@
       }
       
       .plan-name {
-        font-size: 1.5rem;
+        // font-size: 1.5rem;
+        @include semi-large-text;
+
         margin-bottom: 1rem;
       }
       
       .price-section {
-        margin-bottom: 1.5rem;
+        // margin-bottom: 1.5rem;
         
         .price {
-          font-size: 3.5rem;
-          font-weight: 500;
-          margin-bottom: 0.5rem;
+
+            @include heading-2;
+            font-weight: bold;
           
           .period {
             font-size: 1.25rem;
@@ -50,11 +69,9 @@
         }
         
         .billing-info {
-          font-size: 1.125rem;
-          
-          .save {
-            color: #F2994A;
-          }
+        //   font-size: 1.125rem;
+            color: #A0650A;
+            @include body-text;
           
           .separator {
             margin: 0 0.5rem;
@@ -76,13 +93,13 @@
       .btn-select {
         width: 100%;
         padding: 1rem;
-        background-color: #F2994A;
+        background: #FBA92A 0% 0% no-repeat padding-box;
         border: none;
         border-radius: 8px;
         color: #000;
-        font-size: 1.25rem;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
+        
+        @include semi-large-text;
+        
         cursor: pointer;
         transition: background-color 0.2s;
         
@@ -92,9 +109,7 @@
       }
       
       .description {
-        font-size: 1.125rem;
-        line-height: 1.5;
-        margin-bottom: 2rem;
+        @include body-text;
       }
       
       .features-list {
@@ -103,11 +118,13 @@
         margin: 0;
         
         li {
-          position: relative;
-          padding-left: 2rem;
-          margin-bottom: 1rem;
-          font-size: 1.125rem;
-          opacity: 0.4;
+            position: relative;
+            padding-left: 2rem;
+            letter-spacing: 0px;
+          
+            @include body-text;
+            opacity: 0.4;
+            margin-bottom: rem(30);
           
           &.available {
             opacity: 1;
@@ -117,7 +134,7 @@
             content: "";
             position: absolute;
             left: 0;
-            top: 50%;
+            top: 40%;
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
@@ -126,12 +143,14 @@
           }
           
           &:not(.available)::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23808080' stroke-width='2'/%3E%3Cline x1='7' y1='12' x2='17' y2='12' stroke='%23808080' stroke-width='2'/%3E%3C/svg%3E");
-          }
+            //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23808080' stroke-width='2'/%3E%3Cline x1='7' y1='12' x2='17' y2='12' stroke='%23808080' stroke-width='2'/%3E%3C/svg%3E");
+                background-image: url("/wp-content/themes/membership/assets/images/crossed.svg");
+            }
           
           &.available::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='%23F2994A'/%3E%3C/svg%3E");
-          }
+            //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='%23F2994A'/%3E%3C/svg%3E");
+                background-image: url("/wp-content/themes/membership/assets/images/checked-dark.svg");
+            }
         }
       }
     }
@@ -151,6 +170,8 @@
 /* CUSTOM */
 
 .pricing-toggle{
+
+    @include body-text;
     &.mb-40{
         margin-bottom:40px;
     }

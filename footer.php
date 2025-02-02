@@ -14,10 +14,29 @@
 <?php wp_footer(); ?>
 
 <script>
-// Get the necessary elements
+// Get all the necessary elements
 const pricingToggle = document.getElementById('pricingToggle');
 const premiumMonthly = document.getElementById('premium-monthly');
 const premiumYearly = document.getElementById('premium-yearly');
+const monthlyText = document.querySelector('span.me-3'); // Get the "Pay Monthly" span
+const yearlyText = document.querySelector('label.form-check-label'); // Get the "Save with Yearly" label
+
+// Function to toggle text colors
+function toggleTextColors(isYearly) {
+    if (isYearly) {
+        // If yearly is selected
+        monthlyText.classList.remove('text-white');
+        monthlyText.classList.add('text-muted');
+        yearlyText.classList.remove('text-muted');
+        yearlyText.classList.add('text-white');
+    } else {
+        // If monthly is selected
+        monthlyText.classList.remove('text-muted');
+        monthlyText.classList.add('text-white');
+        yearlyText.classList.remove('text-white');
+        yearlyText.classList.add('text-muted');
+    }
+}
 
 // Add event listener to the toggle
 pricingToggle.addEventListener('change', function() {
@@ -25,22 +44,26 @@ pricingToggle.addEventListener('change', function() {
         // If toggle is checked (yearly)
         premiumYearly.style.display = 'block';
         premiumMonthly.style.display = 'none';
+        toggleTextColors(true);
     } else {
         // If toggle is unchecked (monthly)
         premiumYearly.style.display = 'none';
         premiumMonthly.style.display = 'block';
+        toggleTextColors(false);
     }
 });
 
-// Initialize the display on page load (optional)
+// Initialize the display and text colors on page load
 window.addEventListener('DOMContentLoaded', function() {
     // Set initial state based on toggle's initial state
     if (pricingToggle.checked) {
         premiumYearly.style.display = 'block';
         premiumMonthly.style.display = 'none';
+        toggleTextColors(true);
     } else {
         premiumYearly.style.display = 'none';
         premiumMonthly.style.display = 'block';
+        toggleTextColors(false);
     }
 });
 

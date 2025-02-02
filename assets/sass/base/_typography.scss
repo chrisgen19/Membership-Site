@@ -1,0 +1,125 @@
+// _typography.scss
+
+// Base font size variables
+:root {
+    font-size: 16px; // Base font size
+    
+    @media (max-width: 768px) {
+      font-size: 15px; // Slightly smaller for tablets
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 14px; // Even smaller for mobile
+    }
+  }
+  
+  // Function to convert px to rem
+  @function rem($pixels) {
+    @return ($pixels / 16) * 1rem;
+  }
+  
+  // Mixins for common text styles
+  @mixin heading-1 {
+    font-size: rem(48);
+    line-height: 1.2;
+    margin-bottom: rem(24);
+    
+    @media (max-width: 768px) {
+      font-size: rem(40);
+    }
+    
+    @media (max-width: 480px) {
+      font-size: rem(32);
+    }
+  }
+  
+  @mixin heading-2 {
+
+    font-family: 'Helvetica Neue';
+    font-size: rem(50);
+    line-height: rem(60);
+    margin-bottom: rem(20);
+    
+    @media (max-width: 768px) {
+      font-size: rem(50);
+    }
+    
+    @media (max-width: 480px) {
+      font-size: rem(40);
+    }
+  }
+  
+  @mixin heading-3 {
+    font-size: rem(28);
+    line-height: 1.4;
+    margin-bottom: rem(16);
+    
+    @media (max-width: 768px) {
+      font-size: rem(24);
+    }
+    
+    @media (max-width: 480px) {
+      font-size: rem(22);
+    }
+  }
+  
+  @mixin semi-large-text {
+    font-family: 'Helvetica Neue';
+    font-size: rem(20);
+    line-height: 24px;
+    margin-bottom: rem(16);
+    font-weight: normal;
+  }
+  
+  @mixin body-text {
+    font-family: 'Helvetica Neue';
+    font-size: rem(16);
+    line-height: rem(20);
+    margin-bottom: rem(16);
+  }
+  
+  @mixin small-text {
+    font-size: rem(14);
+    line-height: 1.5;
+  }
+  
+  // Apply styles to elements
+  h1, .h1 {
+    @include heading-1;
+  }
+  
+  h2, .h2 {
+    @include heading-2;
+  }
+  
+  h3, .h3 {
+    @include heading-3;
+  }
+  
+  p, .body-text {
+    @include body-text;
+  }
+  
+  .small-text {
+    @include small-text;
+  }
+  
+  // Additional utility classes
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-bold {
+    font-weight: 700;
+  }
+  
+  .text-regular {
+    font-weight: 400;
+  }
+  
+  // Optional: Define a modular scale
+  $scale-ratio: 1.25; // Major third scale
+  
+  .scale-1 { font-size: rem(16 * $scale-ratio); }
+  .scale-2 { font-size: rem(16 * $scale-ratio * $scale-ratio); }
+  .scale-3 { font-size: rem(16 * $scale-ratio * $scale-ratio * $scale-ratio); }

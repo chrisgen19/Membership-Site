@@ -14,7 +14,7 @@
   <?php endif; ?>
 
   <div class="invoice-wrapper thankyou">
-    <h2 class=""><?php _ex('Thank you for your purchase', 'ui', 'memberpress'); ?></h2>
+    <h2 class=""><?php echo wp_kses_post(_x('<span class="header-yellow">Thank</span> you for your purchase', 'ui', 'memberpress')); ?></h2>
 
 
     <?php if ($hide_invoice) : ?>

@@ -369,7 +369,7 @@ function display_memberpress_card_price($post_id) {
 
 function formatPrice($price) {
     if ($price === 'Free') {
-        return '<h2 class="price">Free</h2>';
+        return 'Free';
     }
     
     // Check if the price contains '/month' pattern
@@ -379,7 +379,7 @@ function formatPrice($price) {
         $price_value = trim($price_parts[0]);
         
         return sprintf(
-            '<h2 class="price">%s <span class="period">/month</span></h2>',
+            '%s <span class="period">/month</span>',
             $price_value
         );
     }else if (strpos($price, '/year') !== false) {
@@ -388,7 +388,7 @@ function formatPrice($price) {
 		$price_value = trim($price_parts[0]);
 		
 		return sprintf(
-			'<h2 class="price">%s <span class="period">/year</span></h2>',
+			'%s <span class="period">/year</span>',
 			$price_value
 		);
 	}
@@ -396,3 +396,82 @@ function formatPrice($price) {
     // If it doesn't match the expected format, return the original price
     return sprintf('<h2 class="price">%s</h2>', $price);
 }
+
+/**
+ * Add theme options page to WordPress admin
+ */
+function mytheme_add_theme_page() {
+    add_menu_page(
+        'Theme Options', // Page title
+        'Theme Options', // Menu title
+        'manage_options', // Capability required
+        'theme-options', // Menu slug
+        'mytheme_theme_options_page', // Callback function
+        'dashicons-admin-generic' // Icon
+    );
+}
+add_action('admin_menu', 'mytheme_add_theme_page');
+
+/**
+ * Register theme settings
+ */
+function mytheme_register_settings() {
+    register_setting(
+        'mytheme_options', // Option group
+        'mytheme_header_text', // Option name
+        array(
+            'sanitize_callback' => 'wp_kses_post' // Allows HTML content
+        )
+    );
+}
+add_action('admin_init', 'mytheme_register_settings');
+
+/**
+ * Create the theme options page
+ */
+function mytheme_theme_options_page() {
+    if (!current_user_can('manage_options')) {
+        wp_die('You do not have sufficient permissions to access this page.');
+    }
+    ?>
+    <div class="wrap">
+        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('mytheme_options');
+            do_settings_sections('mytheme_options');
+            ?>
+            <table class="form-table">
+                <tr>
+                    <th scope="row">
+                        <label for="mytheme_header_text">Header Text</label>
+                    </th>
+                    <td>
+                        <textarea 
+                            id="mytheme_header_text" 
+                            name="mytheme_header_text" 
+                            rows="5" 
+                            cols="50" 
+                            class="large-text"
+                        ><?php echo wp_kses_post(get_option('mytheme_header_text')); ?></textarea>
+                        <p class="description">Enter the text you want to display in the header. HTML is allowed.</p>
+                    </td>
+                </tr>
+            </table>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
+}
+
+/**
+ * Display the header text in your theme
+ * Add this code where you want to display the header text
+ */
+function mytheme_display_header_text() {
+    $header_text = get_option('mytheme_header_text');
+    if (!empty($header_text)) {
+        echo '<h1 class="text-center mb-5 header-white">' . wp_kses_post($header_text) . '</h1>';
+    }
+}
+?>

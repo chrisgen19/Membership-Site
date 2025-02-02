@@ -7,8 +7,16 @@ body {
   }
 }
 
+.home{
+    .bg-black {
+        background-color: map-get($colors, "black") !important;
+    }
+}
+
 .membership-header {
 //   min-height: 300px;
+
+    margin-top: rem(69);
 
   h1 {
     font-family: "Impact Regular";
@@ -60,7 +68,15 @@ body {
       .form-check-label {
         font-size: 1rem;
         padding-left: 1rem;
+        color:#FFF;
+
+        
       }
+    }
+
+    .text-muted{
+        color: #FFFFFF !important;
+        opacity: 0.49;
     }
   }
 }
