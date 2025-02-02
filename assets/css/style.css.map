@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/_homepage.scss"],"names":[],"mappings":"AAEA,KACI,kBAHI,CAKJ,QACI,UAAA,CAEA,cACI,aAAA","file":"style.css","sourcesContent":["$color: #070707;\n\nbody {\n    background: $color;\n    \n    h1 {\n        color: darken($color, 20%);\n        \n        &:hover {\n            color: lighten($color, 20%);\n        }\n    }\n}"]}

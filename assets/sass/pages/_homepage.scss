@@ -1,0 +1,66 @@
+body {
+  background: map-get($colors, "black");
+
+  h1 {
+    &:hover {
+    }
+  }
+}
+
+.membership-header {
+//   min-height: 300px;
+
+  h1 {
+    font-family: "Impact Regular";
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    font-size: 65px;
+    line-height: 80px;
+
+    &.header-white{
+        color:#FFF;
+    }
+
+    .header-yellow{
+        color:#FBA92A;
+    }
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+      br{
+        display:none;
+      }
+
+        font-size: 3rem;
+        font-weight: 900;
+        line-height: 1.2;
+    }
+  }
+
+  .pricing-toggle {
+    .form-switch {
+      .form-check-input {
+        width: 60px;
+        height: 30px;
+        margin-top: 0;
+        background-color: #6c757d;
+        border-color: #6c757d;
+        cursor: pointer;
+
+        &:checked {
+          background-color: #ffc107;
+          border-color: #ffc107;
+        }
+      }
+
+      .form-check-label {
+        font-size: 1rem;
+        padding-left: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+/* Add to your theme's style.css */
+
+body{
+    background: black;
+}
+
+.mepr-checkout-container .invoice-wrapper {
+    .invoice-amount{
+        color:#FFF;
+    }
+    table{
+        color: #fff;
+        .bt{
+            color:#FFF;
+        }
+        th,td{
+            color:#FFF;
+        }
+        tr{
+            td{
+                p{
+                    color:#FFF;
+                }
+            }
+        }
+    }
+    .invoice-heading{
+        color:#FFF;
+    }
+
+    &.thankyou{
+        p{
+            color:#FFF;
+        }
+    }
+}
+
+
+
+.mp_wrapper .mp-form-row label,
+#mepr-profile-details dt,
+.mepr-account-container table,
+.mepr-pro-account-table__subscr, .mepr-pro-account-table__rebill{
+    color:#FFF;
+}
+
+.form-wrapper{
+    .mp-form-row-group{
+        gap:10px;
+    }
+    .mp-address-group {
+        .mp-form-row{
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.form-wrapper{
+    .mp-address-group{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.app-layout .site-header, .guest-layout .site-header{
+    background: #1B1B1B !important;
+}
+
+.mepr-checkout-container .invoice-wrapper table tr td{
+    border-bottom: 1px solid #FFF !important;
+}

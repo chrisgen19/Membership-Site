@@ -1,0 +1,22 @@
+$colors: (
+    'primary': #007bff,
+    'secondary': #6c757d,
+    'success': #28a745,
+    'error': #dc3545,
+    'white': #ffffff,
+    'black': #070707
+);
+
+$font-sizes: (
+    'small': 0.875rem,
+    'base': 1rem,
+    'large': 1.25rem,
+    'xlarge': 1.5rem
+);
+
+$breakpoints: (
+    'sm': 576px,
+    'md': 768px,
+    'lg': 992px,
+    'xl': 1200px
+);
