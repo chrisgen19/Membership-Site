@@ -2,23 +2,21 @@
 
 // Base font size variables
 :root {
-    font-size: 16px; // Base font size
+    font-size: 16px; 
     
     @media (max-width: 768px) {
-      font-size: 15px; // Slightly smaller for tablets
+      font-size: 15px; 
     }
     
     @media (max-width: 480px) {
-      font-size: 14px; // Even smaller for mobile
+      font-size: 14px; 
     }
   }
   
-  // Function to convert px to rem
   @function rem($pixels) {
     @return ($pixels / 16) * 1rem;
   }
   
-  // Mixins for common text styles
   @mixin heading-1 {
     font-size: rem(48);
     line-height: 1.2;
@@ -83,7 +81,6 @@
     line-height: 1.5;
   }
   
-  // Apply styles to elements
   h1, .h1 {
     @include heading-1;
   }
@@ -104,7 +101,6 @@
     @include small-text;
   }
   
-  // Additional utility classes
   .text-center {
     text-align: center;
   }
@@ -117,9 +113,8 @@
     font-weight: 400;
   }
   
-  // Optional: Define a modular scale
-  $scale-ratio: 1.25; // Major third scale
-  
+  $scale-ratio: 1.25; 
+
   .scale-1 { font-size: rem(16 * $scale-ratio); }
   .scale-2 { font-size: rem(16 * $scale-ratio * $scale-ratio); }
   .scale-3 { font-size: rem(16 * $scale-ratio * $scale-ratio * $scale-ratio); }

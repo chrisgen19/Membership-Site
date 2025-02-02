@@ -187,11 +187,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-// Add custom meta box to MemberPress product edit screen
 function add_mepr_product_identifier_meta_box() {
     add_meta_box(
         'mepr-product-identifier',
-        __('Product Settings', 'your-text-domain'), // Changed title
+        __('Product Settings', 'your-text-domain'), 
         'render_mepr_product_identifier_meta_box',
         'memberpressproduct',
         'side',
@@ -200,13 +199,10 @@ function add_mepr_product_identifier_meta_box() {
 }
 add_action('add_meta_boxes', 'add_mepr_product_identifier_meta_box');
 
-// Render the custom fields
 function render_mepr_product_identifier_meta_box($post) {
-    // Get existing values
     $product_id = get_post_meta($post->ID, '_mepr_product_identifier', true);
     $hide_box = get_post_meta($post->ID, '_mepr_hide_box', true);
     
-    // Security nonce
     wp_nonce_field('mepr_product_settings_nonce', 'mepr_product_settings_nonce');
     ?>
     <div style="margin-bottom: 15px;">
@@ -228,19 +224,15 @@ function render_mepr_product_identifier_meta_box($post) {
     <?php
 }
 
-// Save the custom fields data
 function save_mepr_product_identifier_meta($post_id) {
-    // Verify nonce
     if (!isset($_POST['mepr_product_settings_nonce']) || 
         !wp_verify_nonce($_POST['mepr_product_settings_nonce'], 'mepr_product_settings_nonce')) {
         return;
     }
 
-    // Check autosave and permissions
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (!current_user_can('edit_post', $post_id)) return;
 
-    // Save Product Identifier
     if (isset($_POST['mepr_product_identifier'])) {
         update_post_meta(
             $post_id,
@@ -249,7 +241,6 @@ function save_mepr_product_identifier_meta($post_id) {
         );
     }
 
-    // Save Hide Box
     $hide_box = isset($_POST['mepr_hide_box']) ? 'on' : 'off';
     update_post_meta($post_id, '_mepr_hide_box', $hide_box);
 }
@@ -259,7 +250,6 @@ add_action('save_post_memberpressproduct', 'save_mepr_product_identifier_meta');
 
 // NEW CUSTOM FIELDS
 
-// Add custom fields to MemberPress products
 function add_memberpress_custom_fields() {
     add_meta_box(
         'memberpress_price_fields',
@@ -270,7 +260,6 @@ function add_memberpress_custom_fields() {
 }
 add_action('add_meta_boxes', 'add_memberpress_custom_fields');
 
-// Render custom fields
 function render_memberpress_price_fields($post) {
     wp_nonce_field('memberpress_price_fields', 'memberpress_price_fields_nonce');
 
@@ -300,7 +289,6 @@ function render_memberpress_price_fields($post) {
     <?php
 }
 
-// Save custom fields data
 function save_memberpress_price_fields($post_id) {
     if (!isset($_POST['memberpress_price_fields_nonce'])) {
         return;
@@ -318,7 +306,6 @@ function save_memberpress_price_fields($post_id) {
         return;
     }
 
-    // Define allowed HTML tags
     $allowed_html = array(
         'span' => array(
             'class' => array(),
@@ -333,7 +320,6 @@ function save_memberpress_price_fields($post_id) {
         )
     );
 
-    // Save card price display with allowed HTML
     if (isset($_POST['card_price_display'])) {
         update_post_meta(
             $post_id,
@@ -342,7 +328,6 @@ function save_memberpress_price_fields($post_id) {
         );
     }
 
-    // Save price description with allowed HTML
     if (isset($_POST['card_price_description'])) {
         update_post_meta(
             $post_id,
@@ -353,7 +338,6 @@ function save_memberpress_price_fields($post_id) {
 }
 add_action('save_post_memberpressproduct', 'save_memberpress_price_fields');
 
-// Helper function to get the custom field values
 function get_memberpress_price_fields($post_id) {
     return array(
         'card_price' => get_post_meta($post_id, '_card_price_display', true),
@@ -361,7 +345,6 @@ function get_memberpress_price_fields($post_id) {
     );
 }
 
-// Optional: Helper function to display the price with HTML
 function display_memberpress_card_price($post_id) {
     $price = get_post_meta($post_id, '_card_price_display', true);
     return wp_kses_post($price);
@@ -372,9 +355,7 @@ function formatPrice($price) {
         return 'Free';
     }
     
-    // Check if the price contains '/month' pattern
     if (strpos($price, '/month') !== false) {
-        // Split the price and period
         $price_parts = explode('/', $price);
         $price_value = trim($price_parts[0]);
         
@@ -383,7 +364,6 @@ function formatPrice($price) {
             $price_value
         );
     }else if (strpos($price, '/year') !== false) {
-		// Split the price and period
 		$price_parts = explode('/', $price);
 		$price_value = trim($price_parts[0]);
 		
@@ -393,42 +373,41 @@ function formatPrice($price) {
 		);
 	}
     
-    // If it doesn't match the expected format, return the original price
     return sprintf('<h2 class="price">%s</h2>', $price);
 }
 
-/**
- * Add theme options page to WordPress admin
- */
 function mytheme_add_theme_page() {
     add_menu_page(
-        'Theme Options', // Page title
-        'Theme Options', // Menu title
-        'manage_options', // Capability required
-        'theme-options', // Menu slug
-        'mytheme_theme_options_page', // Callback function
-        'dashicons-admin-generic' // Icon
+        'Theme Options', 
+        'Theme Options', 
+        'manage_options', 
+        'theme-options', 
+        'mytheme_theme_options_page', 
+        'dashicons-admin-generic' 
     );
 }
 add_action('admin_menu', 'mytheme_add_theme_page');
 
-/**
- * Register theme settings
- */
 function mytheme_register_settings() {
     register_setting(
-        'mytheme_options', // Option group
-        'mytheme_header_text', // Option name
+        'mytheme_options', 
+        'mytheme_header_text', 
         array(
-            'sanitize_callback' => 'wp_kses_post' // Allows HTML content
+            'sanitize_callback' => 'wp_kses_post' 
+        )
+    );
+
+    register_setting(
+        'mytheme_options', 
+        'mytheme_benefits_list',
+        array(
+            'sanitize_callback' => 'wp_kses_post' 
         )
     );
 }
 add_action('admin_init', 'mytheme_register_settings');
 
-/**
- * Create the theme options page
- */
+
 function mytheme_theme_options_page() {
     if (!current_user_can('manage_options')) {
         wp_die('You do not have sufficient permissions to access this page.');
@@ -457,6 +436,21 @@ function mytheme_theme_options_page() {
                         <p class="description">Enter the text you want to display in the header. HTML is allowed.</p>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="mytheme_benefits_list">List All Benefits</label>
+                    </th>
+                    <td>
+                        <textarea 
+                            id="mytheme_benefits_list" 
+                            name="mytheme_benefits_list" 
+                            rows="8" 
+                            cols="50" 
+                            class="large-text"
+                        ><?php echo wp_kses_post(get_option('mytheme_benefits_list')); ?></textarea>
+                        <p class="description">Enter the list of benefits. Type enter for a new line.</p>
+                    </td>
+                </tr>
             </table>
             <?php submit_button(); ?>
         </form>
@@ -464,14 +458,41 @@ function mytheme_theme_options_page() {
     <?php
 }
 
+function mytheme_get_benefits_array() {
+    $benefits_text = get_option('mytheme_benefits_list');
+    if (empty($benefits_text)) {
+        return array();
+    }
+    
+    $benefits = array_filter(
+        explode("\n", $benefits_text),
+        function($line) {
+            return trim($line) !== '';
+        }
+    );
+    
+    $benefits = array_map('trim', $benefits);
+    
+    return array_values($benefits); 
+}
+
 /**
- * Display the header text in your theme
- * Add this code where you want to display the header text
+ * Display the header text
  */
-function mytheme_display_header_text() {
+ function mytheme_display_header_text() {
     $header_text = get_option('mytheme_header_text');
     if (!empty($header_text)) {
         echo '<h1 class="text-center mb-5 header-white">' . wp_kses_post($header_text) . '</h1>';
+    }
+}
+
+/**
+ * Display the benefits list
+ */
+function mytheme_display_benefits_list() {
+    $benefits_list = get_option('mytheme_benefits_list');
+    if (!empty($benefits_list)) {
+        echo '<div class="site-benefits-list">' . wp_kses_post($benefits_list) . '</div>';
     }
 }
 ?>

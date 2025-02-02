@@ -9,7 +9,6 @@ const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
 const concat = require('gulp-concat');
 
-// Configuration
 const config = {
     proxyURL: 'https://membership.test',
     paths: {
@@ -36,17 +35,14 @@ const config = {
     }
 };  
 
-// Styles task for main.scss
 function mainStyles() {
     return compileScss(config.paths.styles.src.main, 'main.css');
 }
 
-// Styles task for memberpress.scss
 function memberpressStyles() {
     return compileScss(config.paths.styles.src.memberpress, 'memberpress.css');
 }
 
-// Helper function to compile SCSS
 function compileScss(src, outputName) {
     return gulp.src(src)
         .pipe(sourcemaps.init())
@@ -60,7 +56,6 @@ function compileScss(src, outputName) {
         .pipe(browserSync.stream());
 }
 
-// Scripts task
 function scripts() {
     return gulp.src(config.paths.scripts.src, { 
         sourcemaps: true,
@@ -74,7 +69,6 @@ function scripts() {
         .pipe(browserSync.stream());
 }
 
-// Images task
 function images() {
     return gulp.src(config.paths.images.src)
         .pipe(imagemin([
@@ -91,7 +85,6 @@ function images() {
         .pipe(gulp.dest(config.paths.images.dest));
 }
 
-// BrowserSync
 function serve(done) {
     browserSync.init({
         proxy: config.proxyURL,
@@ -101,7 +94,6 @@ function serve(done) {
     done();
 }
 
-// Watch task
 function watchFiles() {
     gulp.watch(config.paths.styles.src.main, mainStyles);
     gulp.watch(config.paths.styles.src.memberpress, memberpressStyles);
@@ -110,7 +102,6 @@ function watchFiles() {
     gulp.watch(config.paths.php).on('change', browserSync.reload);
 }
 
-// Complex tasks
 const styles = gulp.parallel(mainStyles, memberpressStyles);
 const watch = gulp.series(
     gulp.parallel(styles, scripts, images),
@@ -120,7 +111,6 @@ const watch = gulp.series(
 
 const build = gulp.parallel(styles, scripts, images);
 
-// Export tasks
 exports.styles = styles;
 exports.mainStyles = mainStyles;
 exports.memberpressStyles = memberpressStyles;
